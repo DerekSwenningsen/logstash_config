@@ -24,6 +24,12 @@ May need to do the following:
 /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WS_ID
 /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WS_KEY
 chown logstash:root <keystore> && chmod 0600 <keystore>
-Go into pipline and change it
+Go into pipline and change it (Add WS_ID & WS_KEY & Custom Log Table)
+sudo mkdir -p /opt/logstash/patterns
+#For cisco switches
+##sudo cp cisco_patterns.txt/opt/logstash/patterns/cisco_patterns
+Test logstash in terminal
+/usr/share/logstash/bin/logstash --path.settings /etc/logstash
+
 sudo systemctl start logstash.service
 sudo systemctl enable logstash.service
