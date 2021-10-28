@@ -2,6 +2,9 @@ sudo apt-get install -y openjdk-11-jdk
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 sudo apt-get install apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+# Become logstash user
+# sudo -u logstash bash
+# Run with sudo on install so that permissions are for logstash:logstash
 sudo apt-get update && sudo apt-get install logstash
 cp cisco_switch_syslog_pipline.conf /etc/logstash/conf.d
 Add plugins:
@@ -9,8 +12,7 @@ Add plugins:
 /usr/share/logstash/bin/logstash-plugin install logstash-codec-es_bulk
 /usr/share/logstash/bin/logstash-plugin install logstash-filter-translate
 /usr/share/logstash/bin/logstash-plugin install microsoft-logstash-output-azure-loganalytics
-# Become logstash user
-# sudo -u logstash bash
+
 vim /etc/sysconfig/logstash
 LOGSTASH_KEYSTORE_PASS=<password here>
 NOTE: ensure no $ or ! Just letters and numbers for password
