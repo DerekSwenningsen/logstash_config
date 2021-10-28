@@ -1,0 +1,26 @@
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+sudo apt-get update && sudo apt-get install logstash
+Put logstash pipeline in /etc/logstash/conf.d
+Add plugins:
+/usr/share/logstash/bin/logstash-plugin update
+/usr/share/logstash/bin/logstash-plugin install logstash-codec-es_bulk
+/usr/share/logstash/bin/logstash-plugin install logstash-filter-translate
+/usr/share/logstash/bin/logstash-plugin install microsoft-logstash-output-azure-loganalytics
+sudo systemctl start logstash.service
+sudo systemctl enable logstash.service
+Become logstash user
+sudo -u logstash bash
+Vim /etc/sysconfig/logstash
+LOGSTASH_KEYSTORE_PASS=<password here>
+NOTE: ensure no $ or ! Just letters and numbers for password
+May need to do the following:
+ set +o history
+ export LOGSTASH_KEYSTORE_PASS=<password here>
+ set -o history
+/usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
+/usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WS_ID
+ Then enter workspace ID to Sentinel Workspace
+/usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WS_KEY
+chown logstash:root <keystore> && chmod 0600 <keystore>
