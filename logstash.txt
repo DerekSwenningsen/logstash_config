@@ -9,11 +9,9 @@ Add plugins:
 /usr/share/logstash/bin/logstash-plugin install logstash-codec-es_bulk
 /usr/share/logstash/bin/logstash-plugin install logstash-filter-translate
 /usr/share/logstash/bin/logstash-plugin install microsoft-logstash-output-azure-loganalytics
-sudo systemctl start logstash.service
-sudo systemctl enable logstash.service
-Become logstash user
-sudo -u logstash bash
-Vim /etc/sysconfig/logstash
+# Become logstash user
+# sudo -u logstash bash
+vim /etc/sysconfig/logstash
 LOGSTASH_KEYSTORE_PASS=<password here>
 NOTE: ensure no $ or ! Just letters and numbers for password
 May need to do the following:
@@ -25,3 +23,6 @@ May need to do the following:
  Then enter workspace ID to Sentinel Workspace
 /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WS_KEY
 chown logstash:root <keystore> && chmod 0600 <keystore>
+Go into pipline and change it
+sudo systemctl start logstash.service
+sudo systemctl enable logstash.service
