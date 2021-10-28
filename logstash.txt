@@ -3,7 +3,7 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 sudo apt-get update && sudo apt-get install logstash
-Put logstash pipeline in /etc/logstash/conf.d
+cp cisco_switch_syslog_pipline.conf /etc/logstash/conf.d
 Add plugins:
 /usr/share/logstash/bin/logstash-plugin update
 /usr/share/logstash/bin/logstash-plugin install logstash-codec-es_bulk
