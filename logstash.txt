@@ -22,7 +22,6 @@ May need to do the following:
  set -o history
 /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
 /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WS_ID
- Then enter workspace ID to Sentinel Workspace
 /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WS_KEY
 chown logstash:root <keystore> && chmod 0600 <keystore>
 Go into pipline and change it
